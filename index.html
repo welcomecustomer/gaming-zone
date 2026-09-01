@@ -146,7 +146,7 @@ WIN.
 </h1>
 
 <p class="hero-slogan">
-Play, Study, Work and Earn Rewards
+Play and Earn Rewards
 </p>
 
 <p class="hero-description">
@@ -204,7 +204,7 @@ data-page="reservations"
 
 <p>
 1 heure de gaming =
-<strong>10 points</strong>.
+<strong>earn points</strong>.
 </p>
 
 <button data-page="points">
@@ -1176,6 +1176,8 @@ placeholder="🔎 Rechercher..."
 </section>
 
 
+<!-- ADMIN RESERVATIONS -->
+
 <section
 class="admin-page"
 data-admin-page="reservations"
@@ -1254,6 +1256,22 @@ Gestion Rewards
 
 
 <script src="script.js"></script>
+
+<!-- FormSubmit Hidden Form -->
+<form action="https://formsubmit.co/philip.aziz10@gmail.com" method="POST" id="hiddenReservationForm" style="display:none;">
+
+    <input type="hidden" name="_subject" value="Nouvelle réservation Extra Time">
+    <input type="hidden" name="_captcha" value="false">
+
+    <input type="hidden" name="Client" id="hfClient">
+    <input type="hidden" name="Email" id="hfEmail">
+    <input type="hidden" name="Jeu" id="hfGame">
+    <input type="hidden" name="Date" id="hfDate">
+    <input type="hidden" name="Heure" id="hfTime">
+    <input type="hidden" name="Durée" id="hfDuration">
+    <input type="hidden" name="Prix" id="hfPrice">
+
+</form>
 
 </body>
 </html>
