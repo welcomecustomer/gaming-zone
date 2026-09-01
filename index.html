@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#08090d">
+<title>Extra Time | Gaming Lounge</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="app">
+
+<header class="topbar">
+
+<a href="#home" class="brand">
+<span class="brand-icon">⚡</span>
+
+<span class="brand-name">
+EXTRA<span>TIME</span>
+</span>
+</a>
+
+<nav class="desktop-nav">
+<a href="#home" data-page="home">Home</a>
+<a href="#games" data-page="games">Games</a>
+<a href="#points" data-page="points">Points</a>
+<a href="#rewards" data-page="rewards">Rewards</a>
+<a href="#reservations" data-page="reservations">Reservations</a>
+</nav>
+
+<div class="top-actions">
+
+<button
+class="notification-button"
+id="notificationButton"
+aria-label="Notifications"
+>
+🔔
+<span id="notificationBadge">0</span>
+</button>
+
+<button
+class="profile-button"
+id="profileButton"
+>
+<span class="profile-avatar" id="headerAvatar">?</span>
+
+<span class="profile-text">
+<strong id="headerName">Sign In</strong>
+<small id="headerRank">Guest</small>
+</span>
+
+<span class="profile-arrow">⌄</span>
+</button>
+
+</div>
+</header>
+
+
+<div class="profile-dropdown" id="profileDropdown">
+
+<div class="dropdown-user">
+
+<div class="dropdown-avatar" id="dropdownAvatar">?</div>
+
+<div>
+<strong id="dropdownName">Guest</strong>
+<small id="dropdownEmail">Non connecté</small>
+</div>
+
+</div>
+
+<div class="dropdown-points">
+<span>⭐ Points</span>
+<strong id="dropdownPoints">0</strong>
+</div>
+
+<a href="#account" data-page="account">
+👤 Mon compte
+</a>
+
+<a href="#points" data-page="points">
+🏆 Mon Rank
+</a>
+
+<button
+id="adminAccessButton"
+class="admin-access-button"
+style="display:none"
+>
+👑 Admin Panel
+</button>
+
+<button id="signOutButton" class="signout-button">
+🚪 Sign Out
+</button>
+
+</div>
+
+
+<div class="notifications-panel" id="notificationsPanel">
+
+<div class="panel-title">
+<strong>Notifications</strong>
+
+<button id="clearNotifications">
+Tout effacer
+</button>
+</div>
+
+<div id="notificationsList">
+<div class="empty-state">
+Aucune notification
+</div>
+</div>
+
+</div>
+
+
+<main id="pageContainer">
+
+
+<section class="page active-page" data-route="home">
+
+<div class="home-hero">
+
+<div class="hero-background"></div>
+
+<div class="hero-content">
+
+<div class="hero-badge">
+⚡ GAMING LOUNGE • SFAX
+</div>
+
+<h1>
+PLAY.
+<span>COMPETE.</span>
+WIN.
+</h1>
+
+<p class="hero-slogan">
+Play, Study, Work and Earn Rewards
+</p>
+
+<p class="hero-description">
+Bienvenue chez Extra Time.
+Jouez à vos jeux préférés, réservez votre session
+et gagnez des points à chaque heure de gaming.
+</p>
+
+<div class="hero-actions">
+
+<button
+class="primary-button"
+data-page="games"
+>
+🎮 Découvrir les jeux
+</button>
+
+<button
+class="secondary-button"
+data-page="reservations"
+>
+📅 Réserver
+</button>
+
+</div>
+
+</div>
+
+<div class="hero-floating-card">
+
+<span>⭐ YOUR RANK</span>
+
+<strong id="heroRank">
+🥉 Bronze
+</strong>
+
+<small id="heroPoints">
+0 points
+</small>
+
+</div>
+
+</div>
+
+
+<div class="home-content">
+
+<div class="home-feature-grid">
+
+<article class="feature-card">
+
+<span>⭐</span>
+
+<h3>Extra Points</h3>
+
+<p>
+1 heure de gaming =
+<strong>10 points</strong>.
+</p>
+
+<button data-page="points">
+Voir mon rank
+</button>
+
+</article>
+
+
+<article class="feature-card">
+
+<span>🏆</span>
+
+<h3>Rewards</h3>
+
+<p>
+Échangez vos points contre
+des récompenses.
+</p>
+
+<button data-page="rewards">
+Voir les rewards
+</button>
+
+</article>
+
+
+<article class="feature-card">
+
+<span>📅</span>
+
+<h3>Réservation</h3>
+
+<p>
+Réservez votre session
+rapidement.
+</p>
+
+<button data-page="reservations">
+Réserver
+</button>
+
+</article>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="page" data-route="games">
+
+<div class="page-header">
+
+<span>🎮 GAMING ZONE</span>
+
+<h1>
+Choose your
+<strong>game.</strong>
+</h1>
+
+<p>
+Sélectionnez votre jeu et réservez votre session.
+</p>
+
+</div>
+
+<div
+class="games-grid"
+id="gamesGrid"
+></div>
+
+</section>
+
+
+<section class="page" data-route="points">
+
+<div class="page-header">
+
+<span>⭐ EXTRA POINTS</span>
+
+<h1>
+Your
+<strong>Rank.</strong>
+</h1>
+
+<p>
+Jouez plus pour monter de niveau.
+</p>
+
+</div>
+
+
+<div class="rank-top-card">
+
+<div class="rank-left">
+
+<div class="big-rank-icon" id="rankIcon">
+🥉
+</div>
+
+<div>
+
+<span>YOUR CURRENT RANK</span>
+
+<h2 id="rankName">
+Bronze
+</h2>
+
+<p id="rankDescription">
+Continuez à jouer pour atteindre Silver.
+</p>
+
+</div>
+
+</div>
+
+<div class="rank-score">
+
+<small>POINTS</small>
+
+<strong id="pointsNumber">
+0
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="rank-progress-card">
+
+<div class="progress-heading">
+
+<div>
+<span>Progression</span>
+
+<strong id="progressText">
+0 / 100
+</strong>
+</div>
+
+<div id="nextRank">
+Silver
+</div>
+
+</div>
+
+<div class="progress-track">
+
+<div
+class="progress-fill"
+id="progressFill"
+></div>
+
+</div>
+
+</div>
+
+
+<div class="ranks-grid">
+
+<article class="rank-card bronze">
+<span>🥉</span>
+<h3>Bronze</h3>
+<p>0 — 99 points</p>
+</article>
+
+<article class="rank-card silver">
+<span>🥈</span>
+<h3>Silver</h3>
+<p>100 — 499 points</p>
+</article>
+
+<article class="rank-card gold">
+<span>🥇</span>
+<h3>Gold</h3>
+<p>500 — 999 points</p>
+</article>
+
+<article class="rank-card diamond">
+<span>💎</span>
+<h3>Diamond</h3>
+<p>1000+ points</p>
+</article>
+
+</div>
+
+
+<div class="points-info">
+
+<div>
+<span>🎮</span>
+<strong>10 points</strong>
+<small>1 heure Gaming</small>
+</div>
+
+<div>
+<span>🔥</span>
+<strong>+10</strong>
+<small>À chaque heure</small>
+</div>
+
+<div>
+<span>🏆</span>
+<strong>Rewards</strong>
+<small>Utilisez vos points</small>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="page" data-route="rewards">
+
+<div class="page-header">
+
+<span>🏆 REWARDS</span>
+
+<h1>
+Your points.
+<strong>Your rewards.</strong>
+</h1>
+
+<p>
+Utilisez vos points pour débloquer vos récompenses.
+</p>
+
+</div>
+
+
+<div class="reward-balance">
+
+<div>
+<span>⭐ Votre solde</span>
+
+<strong id="rewardsBalance">
+0 points
+</strong>
+</div>
+
+<button data-page="points">
+Voir mon Rank
+</button>
+
+</div>
+
+
+<div
+class="rewards-grid"
+id="rewardsGrid"
+></div>
+
+</section>
+
+
+<section class="page" data-route="reservations">
+
+<div class="page-header">
+
+<span>📅 RESERVATIONS</span>
+
+<h1>
+Book your
+<strong>session.</strong>
+</h1>
+
+<p>
+Réservez votre session de gaming.
+</p>
+
+</div>
+
+
+<div class="reservation-layout">
+
+<div class="reservation-form-card">
+
+<h2>Nouvelle réservation</h2>
+
+<p>
+Choisissez votre jeu et votre horaire.
+</p>
+
+<form id="reservationForm">
+
+<label>Jeu</label>
+
+<select
+id="reservationGame"
+required
+>
+
+<option value="">
+Choisir un jeu
+</option>
+
+</select>
+
+
+<label>Date</label>
+
+<input
+type="date"
+id="reservationDate"
+required
+>
+
+
+<label>Heure</label>
+
+<input
+type="time"
+id="reservationTime"
+required
+>
+
+
+<label>Durée</label>
+
+<select
+id="reservationDuration"
+required
+>
+
+<option value="1">
+1 heure
+</option>
+
+<option value="2">
+2 heures
+</option>
+
+<option value="3">
+3 heures
+</option>
+
+<option value="4">
+4 heures
+</option>
+
+</select>
+
+
+<button
+class="primary-button full"
+type="submit"
+>
+Confirmer la réservation
+</button>
+
+</form>
+
+</div>
+
+
+<div class="reservation-list-card">
+
+<div class="card-heading">
+
+<div>
+
+<span>HISTORIQUE</span>
+
+<h2>
+Mes réservations
+</h2>
+
+</div>
+
+</div>
+
+<div id="reservationsList"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="page" data-route="account">
+
+<div class="page-header">
+
+<span>👤 ACCOUNT</span>
+
+<h1>
+My
+<strong>profile.</strong>
+</h1>
+
+<p>
+Gérez votre compte Extra Time.
+</p>
+
+</div>
+
+
+<div class="account-layout">
+
+<div class="account-profile-card">
+
+<div
+class="account-avatar"
+id="accountAvatar"
+>
+?
+</div>
+
+<h2 id="accountName">
+Guest
+</h2>
+
+<p id="accountEmail">
+Non connecté
+</p>
+
+<div class="account-rank">
+
+<span id="accountRankIcon">
+🥉
+</span>
+
+<strong id="accountRankName">
+Bronze
+</strong>
+
+</div>
+
+<button
+class="signout-large"
+id="accountSignOut"
+>
+🚪 Sign Out
+</button>
+
+</div>
+
+
+<div class="account-details">
+
+<div class="account-stat-card">
+<span>⭐</span>
+<small>Mes Points</small>
+<strong id="accountPoints">0</strong>
+</div>
+
+<div class="account-stat-card">
+<span>🏆</span>
+<small>Rank</small>
+<strong id="accountRank">Bronze</strong>
+</div>
+
+<div class="account-stat-card">
+<span>📅</span>
+<small>Réservations</small>
+<strong id="accountReservations">0</strong>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="page" data-route="contact">
+
+<div class="page-header">
+
+<span>📍 EXTRA TIME</span>
+
+<h1>
+Find
+<strong>us.</strong>
+</h1>
+
+<p>
+Venez nous rendre visite à Sfax.
+</p>
+
+</div>
+
+
+<div class="contact-layout">
+
+<div class="contact-card">
+
+<div class="contact-item">
+
+<span>📍</span>
+
+<div>
+
+<small>ADRESSE</small>
+
+<strong>
+Route Manzel Chaker,
+Kansas N°4
+</strong>
+
+<p>
+près Café Fun Time<br>
+Sfax 3003
+</p>
+
+</div>
+
+</div>
+
+
+<div class="contact-item">
+
+<span>📞</span>
+
+<div>
+
+<small>TÉLÉPHONE</small>
+
+<strong>
+22 866 090
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="contact-item">
+
+<span>🕐</span>
+
+<div>
+
+<small>HORAIRES</small>
+
+<strong>
+Ouvert jusqu'à 23:00
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="social-buttons">
+
+<a href="#" target="_blank">
+Facebook
+</a>
+
+<a href="#" target="_blank">
+Instagram
+</a>
+
+</div>
+
+</div>
+
+
+<div class="map-card">
+
+<iframe
+src="https://www.google.com/maps?q=Route%20Manzel%20Chaker%20Sfax%203003&output=embed"
+loading="lazy"
+></iframe>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<nav class="mobile-nav">
+
+<a href="#home" data-page="home">
+<span>🏠</span>
+<small>Home</small>
+</a>
+
+<a href="#games" data-page="games">
+<span>🎮</span>
+<small>Games</small>
+</a>
+
+<a href="#points" data-page="points">
+<span>⭐</span>
+<small>Rank</small>
+</a>
+
+<a href="#rewards" data-page="rewards">
+<span>🏆</span>
+<small>Rewards</small>
+</a>
+
+<a href="#account" data-page="account">
+<span>👤</span>
+<small>Account</small>
+</a>
+
+</nav>
+
+
+<div
+class="modal"
+id="loginModal"
+>
+
+<div class="modal-box">
+
+<button
+class="modal-close"
+data-close="loginModal"
+>
+×
+</button>
+
+<div class="modal-icon">
+⚡
+</div>
+
+<h2>
+Welcome to
+<strong>Extra Time</strong>
+</h2>
+
+<p>
+Connectez-vous pour accéder à votre compte.
+</p>
+
+<form id="loginForm">
+
+<label>Nom</label>
+
+<input
+id="loginName"
+type="text"
+placeholder="Votre nom"
+required
+>
+
+<label>Gmail</label>
+
+<input
+id="loginEmail"
+type="email"
+placeholder="votre@gmail.com"
+required
+>
+
+<button
+class="primary-button full"
+type="submit"
+>
+Se connecter
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+
+<!-- GAME EDIT MODAL -->
+
+<div
+class="modal"
+id="gameEditModal"
+>
+
+<div class="modal-box game-edit-box">
+
+<button
+class="modal-close"
+data-close="gameEditModal"
+>
+×
+</button>
+
+<div class="modal-icon">
+🎮
+</div>
+
+<h2>
+<span id="gameModalAction">Modifier le</span>
+<strong>jeu</strong>
+</h2>
+
+<p>
+Modifiez les informations affichées aux clients.
+</p>
+
+<form id="gameEditForm">
+
+<input
+type="hidden"
+id="editGameId"
+>
+
+<label>Nom du jeu</label>
+
+<input
+id="editGameName"
+type="text"
+required
+>
+
+<label>Image du jeu</label>
+
+<input
+id="editGameImage"
+type="url"
+placeholder="https://..."
+required
+>
+
+<label>Prix (DT / heure)</label>
+
+<input
+id="editGamePrice"
+type="number"
+min="0"
+step="0.5"
+required
+>
+
+<label>Description</label>
+
+<textarea
+id="editGameDescription"
+rows="4"
+required
+></textarea>
+
+<button
+class="primary-button full"
+type="submit"
+>
+💾 Enregistrer les modifications
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+
+<div
+class="toast"
+id="toast"
+>
+
+<span id="toastIcon">
+✓
+</span>
+
+<p id="toastText">
+Action réussie
+</p>
+
+</div>
+
+
+<!-- ADMIN -->
+
+<div
+class="admin-overlay"
+id="adminOverlay"
+>
+
+<aside class="admin-sidebar">
+
+<div class="admin-brand">
+⚡ EXTRA<span>TIME</span>
+<small>ADMIN PANEL</small>
+</div>
+
+
+<button
+class="admin-link active"
+data-admin="dashboard"
+>
+📊 Dashboard
+</button>
+
+
+<button
+class="admin-link"
+data-admin="games"
+>
+🎮 Jeux
+</button>
+
+
+<button
+class="admin-link"
+data-admin="customers"
+>
+👥 Clients
+</button>
+
+
+<button
+class="admin-link"
+data-admin="reservations"
+>
+📅 Réservations
+</button>
+
+
+<button
+class="admin-link"
+data-admin="rewards"
+>
+🏆 Rewards
+</button>
+
+
+<button
+class="admin-exit"
+id="adminExit"
+>
+← Retour au site
+</button>
+
+</aside>
+
+
+<div class="admin-main">
+
+<div class="admin-top">
+
+<div>
+
+<span>ADMIN PANEL</span>
+
+<h1 id="adminTitle">
+Dashboard
+</h1>
+
+</div>
+
+<div class="admin-badge">
+👑 Admin
+</div>
+
+</div>
+
+
+<section
+class="admin-page active"
+data-admin-page="dashboard"
+>
+
+<div class="admin-stat-grid">
+
+<div class="admin-stat">
+<span>👥</span>
+<small>Clients</small>
+<strong id="adminCustomersCount">0</strong>
+</div>
+
+<div class="admin-stat">
+<span>📅</span>
+<small>Réservations</small>
+<strong id="adminReservationsCount">0</strong>
+</div>
+
+<div class="admin-stat">
+<span>⭐</span>
+<small>Points</small>
+<strong id="adminPointsCount">0</strong>
+</div>
+
+<div class="admin-stat">
+<span>💰</span>
+<small>Revenus</small>
+<strong id="adminRevenue">0 DT</strong>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ADMIN GAMES -->
+
+<section
+class="admin-page"
+data-admin-page="games"
+>
+
+<div class="admin-card">
+
+<div class="admin-card-header">
+
+<div>
+
+<span>GESTION DES JEUX</span>
+
+<h2>
+Jeux
+</h2>
+
+</div>
+
+<button
+type="button"
+class="primary-button"
+id="adminAddGameButton"
+>
+➕ Ajouter un jeu
+</button>
+
+</div>
+
+<p class="admin-help-text">
+Modifiez le nom, l'image, la description ou le prix de chaque jeu.
+</p>
+
+<div id="adminGamesList"></div>
+
+</div>
+
+</section>
+
+
+<!-- ADMIN CLIENTS -->
+
+<section
+class="admin-page"
+data-admin-page="customers"
+>
+
+<div class="admin-card">
+
+<div class="admin-card-header">
+
+<div>
+
+<span>GESTION CLIENTS</span>
+
+<h2>
+Clients
+</h2>
+
+</div>
+
+<input
+type="search"
+id="adminCustomerSearch"
+placeholder="🔎 Rechercher..."
+>
+
+</div>
+
+<div id="adminCustomersList"></div>
+
+</div>
+
+</section>
+
+
+<section
+class="admin-page"
+data-admin-page="reservations"
+>
+
+<div class="admin-card">
+
+<span>
+BOOKINGS
+</span>
+
+<h2>
+Réservations
+</h2>
+
+<div id="adminReservationsList"></div>
+
+</div>
+
+</section>
+
+
+<section
+class="admin-page"
+data-admin-page="rewards"
+>
+
+<div class="admin-card">
+
+<span>
+REWARDS
+</span>
+
+<h2>
+Gestion Rewards
+</h2>
+
+<div class="admin-reward-list">
+
+<div>
+<strong>100</strong>
+<span>1h Gaming gratuite</span>
+</div>
+
+<div>
+<strong>250</strong>
+<span>Boisson gratuite</span>
+</div>
+
+<div>
+<strong>500</strong>
+<span>5h Gaming</span>
+</div>
+
+<div>
+<strong>1000</strong>
+<span>VIP Day Pass</span>
+</div>
+
+<div>
+<strong>2000</strong>
+<span>Abonnement mensuel</span>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
