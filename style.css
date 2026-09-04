@@ -12,6 +12,7 @@
 --border:rgba(255,255,255,.08);
 --gradient:linear-gradient(135deg,#00a8ff,#8b5cf6);
 --danger:#ef4444;
+--gold:#ffc94d;
 --radius:22px
 }
 
@@ -1753,6 +1754,196 @@ color:var(--blue-2)
 .admin-reward-list span{
 color:#999;
 font-size:9px
+}
+
+/* =========================================================
+   MONTHLY RESET TIMER
+========================================================= */
+
+.reset-timer-banner{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:12px;
+max-width:900px;
+margin:0 auto 16px;
+padding:14px 20px;
+border:1px solid rgba(139,92,246,.25);
+border-radius:16px;
+background:linear-gradient(135deg,rgba(0,168,255,.08),rgba(139,92,246,.1));
+text-align:center
+}
+
+.reset-timer-icon{
+font-size:18px
+}
+
+.reset-timer-text{
+display:flex;
+align-items:center;
+gap:8px;
+flex-wrap:wrap;
+justify-content:center
+}
+
+.reset-timer-text span{
+color:#999;
+font-size:10px;
+font-weight:700
+}
+
+.reset-timer-text strong{
+color:var(--purple-2);
+font-size:14px;
+font-weight:900;
+letter-spacing:.5px;
+font-variant-numeric:tabular-nums
+}
+
+/* =========================================================
+   LEADERBOARD — TOP 3
+========================================================= */
+
+.leaderboard-card{
+max-width:900px;
+margin:0 auto 20px;
+padding:22px;
+border:1px solid var(--border);
+border-radius:18px;
+background:var(--card)
+}
+
+.leaderboard-heading{
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:14px;
+margin-bottom:16px;
+flex-wrap:wrap
+}
+
+.leaderboard-heading>div:first-child>span{
+display:block;
+color:#666;
+font-size:8px;
+font-weight:800;
+letter-spacing:1.5px
+}
+
+.leaderboard-heading h2{
+margin-top:4px;
+font-size:16px
+}
+
+.leaderboard-secret-note{
+padding:8px 12px;
+border:1px solid rgba(255,201,77,.25);
+border-radius:30px;
+background:rgba(255,201,77,.08);
+color:var(--gold);
+font-size:9px;
+font-weight:800;
+white-space:nowrap
+}
+
+.leaderboard-list{
+display:flex;
+flex-direction:column;
+gap:9px
+}
+
+.leaderboard-item{
+display:flex;
+align-items:center;
+gap:13px;
+padding:13px 15px;
+border:1px solid var(--border);
+border-radius:14px;
+background:rgba(255,255,255,.03)
+}
+
+.leaderboard-item.rank-1{
+border-color:rgba(255,201,77,.35);
+background:linear-gradient(135deg,rgba(255,201,77,.1),rgba(139,92,246,.08))
+}
+
+.leaderboard-rank{
+width:34px;
+height:34px;
+flex-shrink:0;
+display:grid;
+place-items:center;
+border-radius:10px;
+background:rgba(255,255,255,.05);
+font-size:15px;
+font-weight:900
+}
+
+.leaderboard-item.rank-1 .leaderboard-rank{
+background:rgba(255,201,77,.15);
+color:var(--gold)
+}
+
+.leaderboard-avatar{
+width:34px;
+height:34px;
+flex-shrink:0;
+display:grid;
+place-items:center;
+border-radius:10px;
+background:var(--gradient);
+color:white;
+font-size:11px;
+font-weight:900
+}
+
+.leaderboard-info{
+flex:1;
+min-width:0
+}
+
+.leaderboard-info strong{
+display:block;
+font-size:11px;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap
+}
+
+.leaderboard-info small{
+display:block;
+margin-top:3px;
+color:#666;
+font-size:8px
+}
+
+.leaderboard-points{
+flex-shrink:0;
+text-align:right;
+color:var(--blue-2);
+font-size:13px;
+font-weight:900
+}
+
+.leaderboard-points small{
+display:block;
+margin-top:2px;
+color:#555;
+font-size:7px;
+font-weight:700
+}
+
+@media(max-width:650px){
+
+.leaderboard-heading{
+flex-direction:column;
+align-items:flex-start
+}
+
+.leaderboard-info strong{
+max-width:130px
+}
+
 }
 
 @media(max-width:950px){

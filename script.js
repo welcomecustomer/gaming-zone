@@ -250,6 +250,10 @@ document.addEventListener(
 
         setupReservationFormSubmit();
 
+        renderLeaderboard();
+
+        setupResetTimer();
+
     }
 );
 
@@ -512,6 +516,8 @@ function router() {
     if (route === "points") {
 
         renderPoints();
+
+        renderLeaderboard();
 
     }
 
@@ -1491,6 +1497,111 @@ function renderPoints() {
 
 
 /* =========================================================
+   LEADERBOARD — TOP 3
+   IMPORTANT:
+   Classement basé sur les points actuels
+   de tous les clients enregistrés.
+   Le Top 1 gagne une récompense secrète.
+========================================================= */
+
+function renderLeaderboard() {
+
+    const container =
+        document.getElementById(
+            "leaderboardList"
+        );
+
+
+    if (!container) return;
+
+
+    const top =
+        getCustomers()
+            .slice()
+            .sort(
+                (a, b) =>
+                    Number(b.points || 0) -
+                    Number(a.points || 0)
+            )
+            .filter(
+                c =>
+                    Number(c.points || 0) > 0
+            )
+            .slice(0, 3);
+
+
+    if (!top.length) {
+
+        container.innerHTML = `
+
+            <div class="empty-state">
+                Aucun joueur classé pour le moment.
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    const medals =
+        ["🥇", "🥈", "🥉"];
+
+
+    container.innerHTML =
+        top
+            .map(
+                (customer, index) => `
+
+                    <div class="leaderboard-item rank-${index + 1}">
+
+                        <div class="leaderboard-rank">
+                            ${medals[index]}
+                        </div>
+
+                        <div class="leaderboard-avatar">
+                            ${escapeHTML(
+                                customer.name
+                                    .charAt(0)
+                                    .toUpperCase()
+                            )}
+                        </div>
+
+                        <div class="leaderboard-info">
+
+                            <strong>
+                                ${escapeHTML(customer.name)}
+                            </strong>
+
+                            <small>
+                                ${
+                                    index === 0
+                                        ? "🎁 Récompense secrète en jeu"
+                                        : `Top ${index + 1} du classement`
+                                }
+                            </small>
+
+                        </div>
+
+                        <div class="leaderboard-points">
+
+                            ${Number(customer.points || 0)}
+
+                            <small>PTS</small>
+
+                        </div>
+
+                    </div>
+
+                `
+            )
+            .join("");
+
+}
+
+
+/* =========================================================
    REWARDS
 ========================================================= */
 
@@ -1660,10 +1771,266 @@ function claimReward(cost, name) {
 
     renderPoints();
 
+    renderLeaderboard();
+
 
     toast(
         "🏆",
         `${name} réclamé !`
+    );
+
+}
+
+
+/* =========================================================
+   MONTHLY POINTS RESET
+   IMPORTANT:
+   Le compte à rebours pointe toujours vers
+   le 1er jour du mois suivant à 00:00:00,
+   ce qui gère automatiquement les mois de
+   28, 29, 30 ou 31 jours (Février compris).
+========================================================= */
+
+function getResetTarget() {
+
+    const now =
+        new Date();
+
+
+    return new Date(
+        now.getFullYear(),
+        now.getMonth() + 1,
+        1,
+        0,
+        0,
+        0,
+        0
+    );
+
+}
+
+
+function formatCountdown(ms) {
+
+    if (ms < 0) {
+
+        ms = 0;
+
+    }
+
+
+    const totalSeconds =
+        Math.floor(ms / 1000);
+
+
+    const days =
+        Math.floor(totalSeconds / 86400);
+
+
+    const hours =
+        Math.floor(
+            (totalSeconds % 86400) / 3600
+        );
+
+
+    const minutes =
+        Math.floor(
+            (totalSeconds % 3600) / 60
+        );
+
+
+    const seconds =
+        totalSeconds % 60;
+
+
+    return (
+
+        String(days).padStart(2, "0") +
+
+        ":" +
+
+        String(hours).padStart(2, "0") +
+
+        ":" +
+
+        String(minutes).padStart(2, "0") +
+
+        ":" +
+
+        String(seconds).padStart(2, "0")
+
+    );
+
+}
+
+
+function updateResetTimer() {
+
+    const valueElement =
+        document.getElementById(
+            "resetTimerValue"
+        );
+
+
+    if (!valueElement) return;
+
+
+    const target =
+        getResetTarget();
+
+
+    const msLeft =
+        target - new Date();
+
+
+    if (msLeft <= 0) {
+
+        checkMonthlyReset();
+
+    }
+
+
+    valueElement.textContent =
+        formatCountdown(
+            getResetTarget() - new Date()
+        );
+
+}
+
+
+/*
+   Vérifie si on est entré dans un nouveau
+   mois depuis le dernier reset connu.
+   Fonctionne même si personne n'était sur
+   le site pile au moment du changement de mois.
+*/
+
+function checkMonthlyReset() {
+
+    const now =
+        new Date();
+
+
+    const currentPeriod =
+        `${now.getFullYear()}-${
+            String(now.getMonth() + 1).padStart(2, "0")
+        }`;
+
+
+    const lastPeriod =
+        localStorage.getItem(
+            "et_last_reset_period"
+        );
+
+
+    if (lastPeriod !== currentPeriod) {
+
+        if (lastPeriod) {
+
+            resetAllPoints();
+
+        }
+
+
+        localStorage.setItem(
+            "et_last_reset_period",
+            currentPeriod
+        );
+
+    }
+
+}
+
+
+function resetAllPoints() {
+
+    const customers =
+        getCustomers();
+
+
+    if (!customers.length) return;
+
+
+    customers.forEach(
+        customer => {
+
+            customer.points =
+                0;
+
+        }
+    );
+
+
+    saveCustomers(
+        customers
+    );
+
+
+    const currentUser =
+        getCurrentUser();
+
+
+    if (currentUser) {
+
+        const updated =
+            customers.find(
+                c =>
+                    c.email === currentUser.email
+            );
+
+
+        if (updated) {
+
+            saveCurrentUser(
+                updated
+            );
+
+        }
+
+    }
+
+
+    customers.forEach(
+        customer => {
+
+            addNotification(
+                customer.email,
+                "🔄 Nouveau mois : les points ont été réinitialisés à 0. Le classement repart de zéro, à vous de jouer pour le Top 1 !"
+            );
+
+        }
+    );
+
+
+    renderPoints();
+
+    renderRewards();
+
+    renderLeaderboard();
+
+    updateUserInterface();
+
+    updateNotifications();
+
+
+    toast(
+        "🔄",
+        "Nouveau mois : les points de tous les joueurs ont été réinitialisés."
+    );
+
+}
+
+
+function setupResetTimer() {
+
+    checkMonthlyReset();
+
+    updateResetTimer();
+
+
+    setInterval(
+        updateResetTimer,
+        1000
     );
 
 }
@@ -3896,6 +4263,8 @@ function changePoints(
     updateUserInterface();
 
     updateNotifications();
+
+    renderLeaderboard();
 
 
     toast(
